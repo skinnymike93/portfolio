@@ -1,69 +1,108 @@
-import Image from "next/image";
+import { CardFan } from "@/components/CardFan";
+import { Nav } from "@/components/Nav";
+import { Quote } from "@/components/Quote";
+import { Section } from "@/components/Section";
+import {
+  about,
+  available,
+  manifesto,
+  projects,
+  questions,
+  quotes,
+  site,
+  workIntro,
+} from "@/lib/content";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex min-h-full flex-col items-center overflow-x-hidden bg-background">
+      <Nav />
+
+      <section className="flex w-full flex-col items-center px-5 pt-8 md:px-14 md:pt-12">
+        <h1 className="text-center font-serif text-[36px] leading-10 tracking-display text-ink md:text-display md:leading-display">
+          {site.name}
+        </h1>
+        <p className="mt-3 max-w-xl text-center font-sans text-[15px] leading-[22px] font-medium text-muted md:text-base md:leading-6">
+          {site.tagline}
+        </p>
+        <CardFan />
+      </section>
+
+      <section className="mx-auto flex w-full max-w-prose flex-col gap-5 px-5 pt-[72px] pb-20 text-center md:px-0">
+        {manifesto.map((paragraph) => (
+          <p
+            key={paragraph}
+            className="font-sans text-base leading-body font-medium text-body"
+          >
+            {paragraph}
           </p>
+        ))}
+      </section>
+
+      <Section id="work" title="Work" className="pb-[72px]">
+        <p className="pb-5 font-sans text-base leading-body font-medium text-body">
+          {workIntro}
+        </p>
+        <ul className="flex flex-col gap-7">
+          {projects.map((project) => (
+            <li key={project.name} className="flex flex-col gap-1.5">
+              <h3 className="font-serif text-[20px] leading-body text-ink">
+                {project.name}
+              </h3>
+              <p className="font-sans text-small leading-5 font-medium text-muted">
+                {project.tags}
+              </p>
+              <p className="font-sans text-[15px] leading-[22px] font-medium text-body">
+                {project.summary}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Quote {...quotes[0]} />
+
+      <Section title="About" className="pb-12">
+        <div className="flex flex-col gap-4">
+          {about.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="font-sans text-base leading-body font-medium text-body"
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </Section>
+
+      <Quote {...quotes[1]} />
+
+      <Section title="Available" className="pb-[72px]">
+        <p className="pb-6 font-sans text-base leading-body font-medium text-body">
+          {available}
+        </p>
+        <a
+          href={`mailto:${site.email}`}
+          className="inline-flex items-center justify-center rounded-pill bg-ink px-[22px] py-3 font-sans text-[15px] leading-5 font-medium text-white transition-opacity hover:opacity-80"
+        >
+          {site.cta}
+        </a>
+      </Section>
+
+      <Section title="Questions" className="pb-24">
+        <dl className="flex flex-col gap-8">
+          {questions.map((item) => (
+            <div key={item.q} className="flex flex-col gap-2">
+              <dt className="font-sans text-base leading-[22px] font-semibold text-ink">
+                {item.q}
+              </dt>
+              <dd className="font-sans text-base leading-body font-medium text-body">
+                {item.a}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
     </div>
   );
 }
