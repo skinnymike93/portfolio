@@ -82,7 +82,7 @@ export function CardFan() {
   const order = orderFromFront(front, practiceCards.length);
 
   return (
-    <div className="flex w-full justify-center overflow-hidden pt-7 md:overflow-visible md:pt-10">
+    <div className="flex w-full justify-center overflow-hidden pt-10 md:overflow-visible">
       <div className="relative h-[280px] w-[340px] md:h-[340px] md:w-[560px]">
         {order.map((cardIndex, stackIndex) => {
           const card = practiceCards[cardIndex];
