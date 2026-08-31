@@ -15,17 +15,25 @@ export function Nav({
           <a
             key={item.href}
             href={item.href}
-            className="relative shrink-0"
+            className={
+              isActive
+                ? "flex shrink-0 flex-col items-center gap-[0.694cqw]"
+                : "relative shrink-0"
+            }
             aria-current={isActive ? "page" : undefined}
           >
-            <span className={isActive ? "font-bold" : "font-medium"}>
+            <span
+              className={
+                isActive ? "font-bold italic" : "font-medium not-italic"
+              }
+            >
               {item.label}
             </span>
             {isActive ? (
               <img
                 src="/images/nav-underline.svg"
                 alt=""
-                className="absolute top-full left-1/2 mt-[0.694cqw] h-[0.174cqw] w-[8.264cqw] max-w-none -translate-x-1/2"
+                className="h-[0.174cqw] w-[8.264cqw] max-w-none"
               />
             ) : null}
           </a>

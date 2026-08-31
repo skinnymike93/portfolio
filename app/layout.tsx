@@ -13,7 +13,7 @@ const savate = Savate({
 const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["200", "400", "500", "700", "800"],
   style: ["normal", "italic"],
 });
 
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${savate.variable} ${newsreader.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background font-sans text-ink">
+      <body className="texture-favorita-4 min-h-full bg-background font-sans text-ink">
         {children}
       </body>
     </html>
