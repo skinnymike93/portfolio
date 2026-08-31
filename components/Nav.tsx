@@ -1,14 +1,36 @@
-import { site } from "@/lib/content";
+import { navItems } from "@/lib/content";
 
-export function Nav() {
+export function Nav({
+  className,
+  activeHref = "#historia",
+}: {
+  className?: string;
+  activeHref?: string;
+}) {
   return (
-    <header className="flex h-[64px] w-full items-center justify-end px-5 md:h-[72px] md:px-14">
-      <a
-        href="#work"
-        className="shrink-0 rounded-lg bg-index px-3.5 py-2 font-sans text-[13px] font-medium leading-4 text-body transition-colors hover:bg-line"
-      >
-        {site.indexLabel}
-      </a>
-    </header>
+    <nav className={className} aria-label="Primary">
+      {navItems.map((item) => {
+        const isActive = item.href === activeHref;
+        return (
+          <a
+            key={item.href}
+            href={item.href}
+            className="relative shrink-0"
+            aria-current={isActive ? "page" : undefined}
+          >
+            <span className={isActive ? "font-bold" : "font-medium"}>
+              {item.label}
+            </span>
+            {isActive ? (
+              <img
+                src="/images/nav-underline.svg"
+                alt=""
+                className="absolute top-full left-1/2 mt-[0.694cqw] h-[0.174cqw] w-[8.264cqw] max-w-none -translate-x-1/2"
+              />
+            ) : null}
+          </a>
+        );
+      })}
+    </nav>
   );
 }

@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Savate } from "next/font/google";
+import { Instrument_Serif, Newsreader, Savate } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
 
 const savate = Savate({
   variable: "--font-savate",
   subsets: ["latin"],
-  weight: ["300", "500"],
+  weight: ["200", "500"],
+  style: ["normal", "italic"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -25,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${savate.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${savate.variable} ${newsreader.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background font-sans text-ink">
         {children}

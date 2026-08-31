@@ -7,6 +7,30 @@ export const site = {
   cta: "Write to me",
 };
 
+export const navItems = [
+  { href: "#historia", label: "mi historia" },
+  { href: "#proyectos", label: "proyectos" },
+  { href: "#experiencia", label: "experiencia" },
+  { href: "#skills", label: "skills" },
+] as const;
+
+export const heroIntro = {
+  kicker: "starring:",
+  firstName: "Miguel",
+  lastName: "Delgado",
+};
+
+export const profileFacts = [
+  "design engineer",
+  "sevilla, españa",
+  "33 años",
+] as const;
+
+export const cv = {
+  label: "descargar cv",
+  href: "#",
+};
+
 export const markColors = [
   "#0C0A09",
   "#F9A8D4",
