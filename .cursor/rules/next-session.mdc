@@ -1,0 +1,14 @@
+---
+description: Tareas pendientes del portfolio (mañana)
+alwaysApply: true
+---
+
+# Mañana
+
+Seguir por aquí, en este orden:
+
+1. **Pulir animaciones** — hero intro (1.5s por beat), skills boot, tarot, nav mark. Afinar easing, delays y reduced motion.
+2. **Versión mobile** — el home es un artboard desktop; hay que bajar nav, hero, historia, proyectos, experiencia, skills y el póster del footer a un layout que funcione en teléfono.
+3. **Comprar dominio y desplegar** — registrar dominio, enganchar el deploy (Vercel u otro) y dejar el sitio en producción.
+
+No abrir features nuevas hasta cerrar esto.
