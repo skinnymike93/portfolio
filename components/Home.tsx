@@ -111,8 +111,8 @@ export function Home() {
         onNavigate={navigate}
       />
       <section id="historia">
-        <div className="flex min-h-dvh w-full items-center justify-center">
-          <div className="@container relative aspect-[1440/820] w-[min(100vw,calc(100dvh*1440/820))]">
+        <div className="hero-stage flex min-h-dvh w-full items-center justify-center">
+          <div className="hero-board @container relative aspect-[1440/820] w-[min(100vw,calc(100dvh*1440/820))]">
             <Historia />
           </div>
         </div>
@@ -155,11 +155,11 @@ function SiteHeader({
         atTop ? "bg-transparent" : "bg-background"
       }`}
     >
-      <div className="flex items-start justify-between gap-10 overflow-visible px-[4.861vw] pt-10 pb-6">
+      <div className="site-header-bar flex items-start justify-between gap-10 overflow-visible px-[4.861vw] pt-10 pb-6">
         <Nav
           activeHref={activeHref}
           onNavigate={onNavigate}
-          className="flex items-start gap-12 overflow-visible font-body text-2xl leading-none tracking-[0.025em] whitespace-nowrap text-ink"
+          className="site-nav flex items-start gap-12 overflow-visible font-body text-2xl leading-none tracking-[0.025em] whitespace-nowrap text-ink"
         />
         <a
           href={cv.href}
