@@ -9,7 +9,7 @@ export const site = {
 
 export const navItems = [
   { href: "#historia", label: "mi historia" },
-  { href: "#proyectos", label: "mis proyectos" },
+  { href: "#proyectos", label: "proyectos" },
   { href: "#experiencia", label: "experiencia" },
   { href: "#skills", label: "skills" },
 ] as const;
@@ -123,7 +123,7 @@ export const workIntro =
   "A short index of products I’ve designed and built — systems, tools, and surfaces made to feel inevitable. Each piece is a walkthrough of the problem, the decisions, and the last 5% of craft.";
 
 export const projectSpread = {
-  kicker: "mis proyectos",
+  kicker: "proyectos",
   lede: "dos productos, los míos",
   items: [
     {
@@ -134,6 +134,8 @@ export const projectSpread = {
       body: "Mono es la radio repensada en la era de la IA, aquella en la que podemos satisfacer nuestra curiosidad en segundos. Un producto prompt to radio que permite vía voz o texto crear piezas de audio con estética radiofónica.",
       href: "#proyectos",
       card: "/images/tarot/mono.png",
+      video: "/videos/mono.mp4",
+      poster: "/videos/mono.jpg",
       suit: "mono",
     },
     {
@@ -144,6 +146,8 @@ export const projectSpread = {
       body: "Esferica nace de mi pasión por la pelota: una plataforma con más de 100k podcasts de fútbol organizados en competiciones, equipos y colecciones, para que no tengas que andar buscando eternamente lo que sucede con tu equipo.",
       href: "#proyectos",
       card: "/images/tarot/esferica.png",
+      video: "/videos/esferica.mp4",
+      poster: "/videos/esferica.jpg",
       suit: "esferica",
     },
   ],
@@ -189,7 +193,7 @@ export const experience = {
     {
       company: "Kampaoh",
       body: [
-        "Imagina a aprender a lidiar con la customer experience a 1000km de casa, con clientes que acuden a un camping con una maleta de ruedines.",
+        "Imagina aprender a lidiar con la customer experience a 1000km de casa, con clientes que acuden a un camping con una maleta de ruedines.",
         "Nada es lo que parece.",
       ],
     },
@@ -226,11 +230,15 @@ export const aboutStory = {
     year: "18",
     place: "el pro",
     body: "La realidad es que, con 18 años, lo más cercano que había estado al diseño fue editando —como si no hubiera un mañana— las equipaciones, botas y escudos de todos los equipos del Pro. Todo lo que hice en mi vida por aquella época era ser un empollón, jugar en el equipo del pueblo y soñar despierto con la posibilidad de que me pagaran por entrar gratis a un estadio de fútbol.",
-    pull: "Sí, soy bastante ordinario.",
   },
   liverpool: {
-    ticket: "Liverpool",
-    meta: "1 año",
+    fromCode: "SVQ",
+    fromCity: "Sevilla",
+    toCode: "LPL",
+    toCity: "Liverpool",
+    passenger: "Delgado, M.",
+    flight: "MD018",
+    valid: "1 año",
     body: "Fíjate la obsesión que incluso me fui a vivir a Liverpool porque era, por aquel entonces, uno de mis equipos favoritos. Casi un año. Fregando platos. Una ruina, pero ahora mi cabeza lo recuerda con nostalgia y orgullo.",
   },
   journalism: {

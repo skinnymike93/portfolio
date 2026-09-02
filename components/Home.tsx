@@ -163,7 +163,7 @@ function SiteHeader({
         />
         <a
           href={cv.href}
-          className="hero-cv flex h-12 shrink-0 items-center justify-center gap-1.5 rounded-lg border-[1.5px] border-ink/25 px-2.5 font-body text-2xl font-normal leading-none whitespace-nowrap text-ink"
+          className="hero-cv flex h-[2.55rem] shrink-0 items-center justify-center gap-[0.32rem] rounded-[0.425rem] border-[1.275px] border-ink/25 px-[0.53rem] font-body text-[1.275rem] font-normal leading-none whitespace-nowrap text-ink"
         >
           <span className="relative size-[1em] shrink-0 overflow-clip">
             <img

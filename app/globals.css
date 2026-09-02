@@ -181,45 +181,260 @@ body::after {
   clear: both;
 }
 
-.historia-ticket {
-  display: inline-flex;
-  align-items: center;
+.historia-pro-mark {
+  display: block;
+  width: min(100%, 12rem);
+  margin: 0;
+}
+
+.historia-pro-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: left top;
+  user-select: none;
+}
+
+.historia-pass {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0.7rem 4.15rem;
   align-self: start;
-  width: fit-content;
-  gap: 0.4rem;
-  border: 1px dashed var(--color-ink);
-  padding: 0.22rem 0.52rem;
+  width: min(100%, 21.5rem);
+  margin: 0.15rem 0 0.2rem;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-background);
+  color: var(--color-ink);
+  transform: rotate(-1.8deg);
+  transform-origin: left center;
+}
+
+.historia-pass-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.72rem 0.8rem 0.62rem 0.9rem;
+}
+
+.historia-pass-kicker {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 0.625rem;
+  font-size: 0.62rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.historia-pass-name {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  line-height: 1;
   text-transform: uppercase;
-  transform: rotate(1.6deg);
+}
+
+.historia-pass-route {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-top: 0.72rem;
+}
+
+.historia-pass-code {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 0.85;
+}
+
+.historia-pass-plane {
+  flex-shrink: 0;
+  align-self: center;
+  opacity: 0.85;
+}
+
+.historia-pass-cities {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0.28rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.historia-pass-meta {
+  display: flex;
+  gap: 1.15rem;
+  margin-top: 0.78rem;
+}
+
+.historia-pass-meta p {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.historia-pass-meta span {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.16em;
+}
+
+.historia-pass-bars {
+  display: block;
+  width: 100%;
+  height: 0.72rem;
+  margin-top: 0.7rem;
+  color: var(--color-ink);
+}
+
+.historia-pass-cut {
+  position: relative;
+  width: 0.7rem;
+  border-left: 1px dashed color-mix(in srgb, var(--color-ink) 70%, transparent);
+  border-right: 1px dashed color-mix(in srgb, var(--color-ink) 70%, transparent);
+  background: var(--color-background);
+}
+
+.historia-pass-cut::before,
+.historia-pass-cut::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 0.78rem;
+  height: 0.78rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-background);
+  transform: translateX(-50%);
+}
+
+.historia-pass-cut::before {
+  top: -0.42rem;
+}
+
+.historia-pass-cut::after {
+  bottom: -0.42rem;
+}
+
+.historia-pass-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.28rem 0.5rem;
+}
+
+.historia-pass-stub-code {
+  margin: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.historia-pass-stub-valid {
+  margin: 0.55rem 0 0;
+  writing-mode: vertical-rl;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  transform: rotate(180deg);
+}
+
+.historia-pass-bars-stub {
+  width: 1.55rem;
+  height: 0.55rem;
+  margin-top: 0.55rem;
+  transform: rotate(-90deg);
 }
 
 .historia-crease {
   display: flex;
-  width: 100%;
+  flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
-  padding: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  gap: 0.62rem;
+  padding: 0.55rem 0.15rem 0.2rem;
   border: 0;
   background: none;
-  color: inherit;
+  color: var(--color-ink);
   font: inherit;
   cursor: pointer;
-  transform: rotate(-0.4deg);
 }
 
-.historia-crease:hover .historia-crease-line {
-  opacity: 0.75;
+.historia-crease-face {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
-.historia-crease-line {
+.historia-crease-copy {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.historia-crease-caret {
+  display: block;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transform-origin: center;
+  transition: transform 0.28s cubic-bezier(0.22, 0.72, 0.28, 1);
+}
+
+.historia-crease-rule {
+  display: block;
+  width: 100%;
   height: 0;
-  flex: 1;
-  border-top: 1px dashed currentColor;
-  opacity: 0.4;
+  border-top: 1px solid currentColor;
+  opacity: 0.5;
+  transition: opacity 0.22s ease;
+}
+
+.historia-crease[aria-expanded="true"] .historia-crease-caret {
+  transform: rotate(180deg);
+}
+
+.historia-crease:hover .historia-crease-rule,
+.historia-crease:focus-visible .historia-crease-rule {
+  opacity: 0.9;
+}
+
+.historia-crease:focus-visible {
+  outline: none;
+}
+
+.historia-crease:focus-visible .historia-crease-copy {
+  outline: 1px solid color-mix(in srgb, var(--color-ink) 45%, transparent);
+  outline-offset: 6px;
 }
 
 .historia-fold {
@@ -433,25 +648,202 @@ body::after {
   }
 }
 
-.tarot-legend {
-  display: grid;
-  grid-template-columns: 1fr;
-  width: min(100%, 52rem);
-  margin-inline: auto;
-  margin-top: 3.5rem;
-  gap: 3.25rem;
+.tarot-breeze.is-breeze-ready {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translate3d(0, -1.15rem, 0);
+  pointer-events: none;
 }
 
-@media (min-width: 768px) {
-  .tarot-legend {
-    grid-template-columns: 1fr 1fr;
-    gap: 3.5rem 2.75rem;
+.tarot-breeze.is-breezing {
+  animation: tarot-breeze 0.86s cubic-bezier(0.22, 0.72, 0.28, 1) both;
+}
+
+@keyframes tarot-breeze {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(0, -1.15rem, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
   }
 }
 
-.tarot-legend li {
+.tarot-legend {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: clamp(6.25rem, 13vh, 10rem);
+  gap: clamp(7.75rem, 18vh, 13.5rem);
+}
+
+.tarot-entry {
+  display: grid;
+  grid-template-columns: 7.35rem minmax(0, 34rem);
+  column-gap: 2.75rem;
+  align-items: start;
+  width: fit-content;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.tarot-entry-esferica {
+  margin-left: auto;
+  grid-template-columns: minmax(0, 34rem) 7.35rem;
+}
+
+.tarot-entry-esferica .tarot-phone {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.tarot-entry-esferica .tarot-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tarot-copy {
+  padding-top: 0.35rem;
+  padding-bottom: 0.85rem;
+}
+
+.tarot-copy h3 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(2.25rem, 3.2vw, 2.85rem);
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  line-height: 1.12;
+}
+
+.tarot-copy p {
+  max-width: 32rem;
+  margin: 1.85rem 0 0;
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.52;
+  letter-spacing: 0.01em;
+}
+
+.tarot-phone {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 7.35rem;
+  margin: 0;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  transition: transform 0.48s cubic-bezier(0.16, 0.84, 0.32, 1);
+}
+
+.tarot-phone-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 9 / 20;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 0.55rem;
+  background: var(--color-ink);
+}
+
+.tarot-entry-mono .tarot-phone {
+  transform: rotate(-2.4deg);
+}
+
+.tarot-entry-esferica .tarot-phone {
+  transform: rotate(2.6deg);
+}
+
+.tarot-phone:hover,
+.tarot-phone:focus-within {
+  z-index: 6;
+}
+
+.tarot-entry-mono .tarot-phone:hover,
+.tarot-entry-mono .tarot-phone:focus-within,
+.tarot-entry-esferica .tarot-phone:hover,
+.tarot-entry-esferica .tarot-phone:focus-within {
+  transform: rotate(0deg) scale(1.72);
+}
+
+.tarot-phone video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarot-phone-skip {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  padding: 0.32rem 0.28rem 0.28rem;
+  background: color-mix(in srgb, var(--color-background) 92%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.tarot-phone:hover .tarot-phone-skip,
+.tarot-phone:focus-within .tarot-phone-skip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tarot-phone-skip button {
+  margin: 0;
+  padding: 0.05rem 0.12rem;
+  border: 0;
+  background: none;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tarot-phone-skip button:hover,
+.tarot-phone-skip button:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.tarot-phone-skip button:focus-visible {
+  outline: 1px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .tarot-entry,
+  .tarot-entry-esferica {
+    grid-template-columns: 6.1rem minmax(0, 1fr);
+    margin-left: 0;
+  }
+
+  .tarot-entry-esferica .tarot-phone {
+    grid-column: 1;
+  }
+
+  .tarot-entry-esferica .tarot-copy {
+    grid-column: 2;
+  }
+
+  .tarot-phone {
+    width: 6.1rem;
+  }
 }
 
 .cv-axis {
@@ -579,7 +971,7 @@ body::after {
 @media (min-width: 768px) {
   .cv-axis {
     --cv-spine-x: 50%;
-    width: min(100%, 56rem);
+    width: min(100%, 66rem);
   }
 
   .cv-axis h2 {
@@ -589,7 +981,11 @@ body::after {
   .cv-row {
     grid-template-columns: 1fr var(--cv-node) 1fr;
     column-gap: 1.85rem;
-    padding-bottom: 3.15rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .cv-row + .cv-row {
+    margin-top: -4.25rem;
   }
 
   .cv-row:last-child {
@@ -598,12 +994,31 @@ body::after {
 
   .cv-node {
     grid-column: 2;
+    grid-row: 1;
     justify-self: center;
   }
 
-  .cv-row h3,
+  .cv-row h3 {
+    grid-row: 1;
+  }
+
   .cv-row .cv-copy {
+    grid-row: 2;
+  }
+
+  .cv-row:nth-child(odd) h3,
+  .cv-row:nth-child(odd) .cv-copy {
     grid-column: 3;
+  }
+
+  .cv-row:nth-child(even) h3,
+  .cv-row:nth-child(even) .cv-copy {
+    grid-column: 1;
+    justify-self: end;
+  }
+
+  .cv-row:nth-child(even) h3 {
+    text-align: right;
   }
 
   .cv-copy p {
@@ -892,6 +1307,63 @@ body::after {
   }
 }
 
+@keyframes cv-breeze {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(0, -1.15rem, 0);
+    clip-path: inset(0 0 42% 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+    clip-path: inset(0);
+  }
+}
+
+.cv-year .cv-breeze {
+  display: block;
+}
+
+.cv-breeze.is-breeze-ready {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translate3d(0, -1.15rem, 0);
+  clip-path: inset(0 0 42% 0);
+}
+
+.cv-breeze.is-breezing {
+  animation: cv-breeze 0.86s cubic-bezier(0.22, 0.72, 0.28, 1) both;
+}
+
+.historia-spread.is-breeze-ready .historia-breeze {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translate3d(-1.15rem, 0, 0);
+  pointer-events: none;
+}
+
+.historia-spread.is-breezing .historia-breeze {
+  animation: hero-breeze 0.86s cubic-bezier(0.22, 0.72, 0.28, 1) both;
+}
+
+.historia-spread.is-breezing .historia-breeze-a {
+  animation-delay: 0s;
+}
+
+.historia-spread.is-breezing .historia-breeze-b {
+  animation-delay: 0.09s;
+}
+
+.historia-spread.is-breezing .historia-breeze-c {
+  animation-delay: 0.18s;
+}
+
+.historia-spread.is-breezing .historia-breeze-d {
+  animation-delay: 0.27s;
+}
+
 .nav-mark {
   color: var(--color-ink);
   opacity: 0.95;
@@ -935,8 +1407,13 @@ body::after {
     clip-path: none;
   }
 
-  .historia-ticket {
+  .historia-pass {
     transform: none;
+  }
+
+  .historia-crease-caret,
+  .historia-crease-rule {
+    transition: none;
   }
 
   .historia-fold {
@@ -966,6 +1443,20 @@ body::after {
     transform: rotate(17deg);
   }
 
+  .tarot-phone {
+    transform: none;
+    transition: none;
+  }
+
+  .tarot-phone:hover,
+  .tarot-phone:focus-within {
+    transform: none;
+  }
+
+  .tarot-phone-skip {
+    transition: none;
+  }
+
   .skill-sheet.is-booting .skill-meter:not(.skill-buffer) span.is-filled {
     animation: none;
     background: var(--color-ink);
@@ -988,6 +1479,20 @@ body::after {
   .hero-intro .site-header,
   .hero-intro .hero-facts,
   .hero-intro .scroll-cue {
+    pointer-events: auto;
+  }
+
+  .historia-spread.is-breeze-ready .historia-breeze,
+  .historia-spread.is-breezing .historia-breeze,
+  .cv-breeze.is-breeze-ready,
+  .cv-breeze.is-breezing,
+  .tarot-breeze.is-breeze-ready,
+  .tarot-breeze.is-breezing {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: none;
     pointer-events: auto;
   }
 }
