@@ -26,43 +26,36 @@ export function ScrollCue({
         className={`scroll-cue-track ${atTop ? "" : "scroll-cue-track-up"}`}
         aria-hidden="true"
       >
-        {atTop ? (
-          <>
-            <span className="scroll-cue-stem" />
-            <span className="scroll-cue-drop" />
-            <svg
-              className="scroll-cue-head"
-              viewBox="0 0 12 8"
-              width="12"
-              height="8"
-              fill="none"
-            >
-              <path
-                d="M1 1.5 L6 6.5 L11 1.5"
-                stroke="currentColor"
-                strokeWidth="1.15"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </>
-        ) : (
-          <svg
-            className="scroll-cue-head"
-            viewBox="0 0 12 8"
-            width="12"
-            height="8"
-            fill="none"
-          >
-            <path
-              d="M1 6.5 L6 1.5 L11 6.5"
-              stroke="currentColor"
-              strokeWidth="1.15"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
+        <svg
+          className="scroll-cue-mark"
+          viewBox="0 0 12 46"
+          width="12"
+          height="46"
+          fill="none"
+        >
+          <path
+            className="scroll-cue-rail"
+            d="M6 1V44.6"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <path
+            className="scroll-cue-trace"
+            d="M6 1V44.6"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <path
+            className="scroll-cue-tip"
+            d="M1.9 40.4 6 44.6 10.1 40.4"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </span>
       <span className="flex items-baseline gap-[0.35em] font-body text-[13px] font-extralight italic leading-none tracking-[0.08em]">
         {label}

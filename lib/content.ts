@@ -31,6 +31,11 @@ export const cv = {
   href: "#",
 };
 
+export const github = {
+  label: "GitHub",
+  href: "https://github.com/skinnymike93",
+};
+
 export const markColors = [
   "#0C0A09",
   "#F9A8D4",

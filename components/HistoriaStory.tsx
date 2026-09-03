@@ -47,7 +47,15 @@ export function HistoriaStory() {
           observer.disconnect();
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
+      {
+        // En pantallas cortas la sección no llega a ocupar el 20% pedido y el
+        // observer no dispararía nunca, dejando el botón invisible e inerte.
+        threshold: Math.min(
+          0.2,
+          (window.innerHeight * 0.7) / Math.max(root.offsetHeight, 1),
+        ),
+        rootMargin: "0px 0px -10% 0px",
+      },
     );
 
     observer.observe(root);

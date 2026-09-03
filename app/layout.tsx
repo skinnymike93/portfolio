@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Newsreader, Savate } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
@@ -27,6 +27,13 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: `${site.name} — ${site.role}`,
   description: site.tagline,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#eeeeee",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

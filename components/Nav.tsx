@@ -5,7 +5,7 @@ import { InkMark } from "@/components/InkMark";
 
 export type NavHref = (typeof navItems)[number]["href"];
 
-function NavMark() {
+export function NavMark() {
   return (
     <span className="nav-mark pointer-events-none absolute top-full left-0 -mt-1 w-[130%] max-w-none -translate-x-[6%] overflow-visible">
       <InkMark />
