@@ -25,8 +25,20 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
-  description: site.tagline,
+  title: "Miguel Delgado — Portfolio",
+  description: "Product Design Engineer",
+  openGraph: {
+    title: "Miguel Delgado — Portfolio",
+    description: "Product Design Engineer",
+    url: "https://migueldelgado.me",
+    siteName: "Miguel Delgado",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Miguel Delgado — Portfolio",
+    description: "Product Design Engineer",
+  },
 };
 
 export const viewport: Viewport = {
