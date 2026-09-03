@@ -2,6 +2,12 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { projectSpread } from "@/lib/content";
+import {
+  attachBreezeScrollFallback,
+  breezeObserverInit,
+  playObserverInit,
+  revealBreeze,
+} from "@/lib/breeze-reveal";
 
 function Sparkle({ className }: { className: string }) {
   return (
@@ -90,6 +96,7 @@ export function Proyectos() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const breezeNodes = [...root.querySelectorAll(".tarot-breeze")];
     let spreadRevealed = reduced;
+    let playingLatched = reduced;
 
     if (!reduced) {
       for (const node of breezeNodes) {
@@ -98,7 +105,31 @@ export function Proyectos() {
     }
 
     function syncPlaying(intersecting: boolean) {
-      spread.classList.toggle("is-playing", intersecting && spreadRevealed);
+      if (spreadRevealed) {
+        if (intersecting) {
+          playingLatched = true;
+        }
+        spread!.classList.toggle(
+          "is-playing",
+          playingLatched || intersecting,
+        );
+      }
+    }
+
+    function scheduleSpreadPlay(staggerIndex: number) {
+      const wait = 700 + staggerIndex * 90;
+      window.setTimeout(() => {
+        spreadRevealed = true;
+        playingLatched = true;
+        spread!.classList.add("is-playing");
+      }, wait);
+    }
+
+    function revealNode(el: Element, staggerIndex: number) {
+      revealBreeze(el, staggerIndex);
+      if (el === spread) {
+        scheduleSpreadPlay(staggerIndex);
+      }
     }
 
     const breezeObserver =
@@ -112,26 +143,11 @@ export function Proyectos() {
                 );
 
               entering.forEach((entry, index) => {
-                const el = entry.target;
-                if (!el.classList.contains("is-breeze-ready")) {
-                  return;
-                }
-                el.classList.remove("is-breeze-ready");
-                el.classList.add("is-breezing");
-                if (index > 0) {
-                  (el as HTMLElement).style.animationDelay = `${index * 0.09}s`;
-                }
-                if (el === spread) {
-                  const wait = 700 + index * 90;
-                  window.setTimeout(() => {
-                    spreadRevealed = true;
-                    syncPlaying(true);
-                  }, wait);
-                }
-                breezeObserver?.unobserve(el);
+                revealNode(entry.target, index);
+                breezeObserver?.unobserve(entry.target);
               });
             },
-            { threshold: 0.22, rootMargin: "0px 0px -14% 0px" },
+            breezeObserverInit(),
           )
         : null;
 
@@ -141,11 +157,19 @@ export function Proyectos() {
       }
     }
 
+    const detachFallback =
+      !reduced && breezeNodes.length > 0
+        ? attachBreezeScrollFallback(breezeNodes, (el, index) => {
+            revealNode(el, index);
+            breezeObserver?.unobserve(el);
+          })
+        : () => {};
+
     const playObserver = new IntersectionObserver(
       ([entry]) => {
         syncPlaying(entry.isIntersecting);
       },
-      { threshold: 0.4 },
+      playObserverInit(),
     );
 
     playObserver.observe(spread);
@@ -166,7 +190,7 @@ export function Proyectos() {
                 }
               }
             },
-            { threshold: 0.45 },
+            playObserverInit(),
           )
         : null;
 
@@ -178,6 +202,7 @@ export function Proyectos() {
 
     return () => {
       breezeObserver?.disconnect();
+      detachFallback();
       playObserver.disconnect();
       videoObserver?.disconnect();
     };

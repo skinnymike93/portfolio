@@ -2,6 +2,11 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { experience } from "@/lib/content";
+import {
+  attachBreezeScrollFallback,
+  breezeObserverInit,
+  revealBreeze,
+} from "@/lib/breeze-reveal";
 
 function ArrowDown({ className }: { className?: string }) {
   return (
@@ -47,6 +52,11 @@ export function Experiencia() {
       node.classList.add("is-breeze-ready");
     }
 
+    function revealNode(el: Element, staggerIndex: number) {
+      revealBreeze(el, staggerIndex);
+      observer.unobserve(el);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         const entering = entries
@@ -56,25 +66,22 @@ export function Experiencia() {
           );
 
         entering.forEach((entry, index) => {
-          const el = entry.target;
-          if (!el.classList.contains("is-breeze-ready")) {
-            return;
-          }
-          el.classList.remove("is-breeze-ready");
-          el.classList.add("is-breezing");
-          if (index > 0) {
-            (el as HTMLElement).style.animationDelay = `${index * 0.09}s`;
-          }
-          observer.unobserve(el);
+          revealNode(entry.target, index);
         });
       },
-      { threshold: 0.22, rootMargin: "0px 0px -14% 0px" },
+      breezeObserverInit(),
     );
 
     for (const node of nodes) {
       observer.observe(node);
     }
-    return () => observer.disconnect();
+
+    const detachFallback = attachBreezeScrollFallback(nodes, revealNode);
+
+    return () => {
+      observer.disconnect();
+      detachFallback();
+    };
   }, []);
 
   return (
@@ -109,7 +116,9 @@ export function Experiencia() {
                 </h3>
                 <div className="cv-copy">
                   {item.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph} className="historia-body">
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
               </li>

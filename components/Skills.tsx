@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { skillStats } from "@/lib/content";
 
 const PIP_MS = 70;
@@ -52,9 +52,9 @@ function BufferMeter({ name, max, live }: { name: string; max: number; live: boo
       className={`skill-meter skill-buffer${live ? " is-live" : ""}`}
       role="meter"
       aria-label={name}
+      aria-valuetext="en curso"
       aria-valuemin={0}
       aria-valuemax={max}
-      aria-valuetext="en curso"
     >
       {Array.from({ length: max }, (_, index) => (
         <span
@@ -67,32 +67,39 @@ function BufferMeter({ name, max, live }: { name: string; max: number; live: boo
   );
 }
 
+function viewportHeight() {
+  return window.visualViewport?.height ?? window.innerHeight;
+}
+
+function isListVisible(node: HTMLElement) {
+  const rect = node.getBoundingClientRect();
+  const vh = viewportHeight();
+  const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+  return visible >= 48 && rect.bottom > 40 && rect.top < vh;
+}
+
 export function Skills() {
-  const sheetRef = useRef<HTMLElement>(null);
-  const played = useRef(false);
+  const listRef = useRef<HTMLUListElement>(null);
   const [booting, setBooting] = useState(false);
   const [lit, setLit] = useState(false);
   const [buffering, setBuffering] = useState(false);
 
-  useEffect(() => {
-    const sheet = sheetRef.current;
-    if (!sheet) {
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    if (!list) {
       return;
     }
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let animated = false;
 
-    function boot() {
-      if (played.current) {
-        return;
-      }
-      played.current = true;
-      if (reduced) {
-        setLit(true);
-        return;
-      }
-      setBooting(true);
+    function reveal() {
       setLit(true);
+      if (reduced || animated) {
+        return;
+      }
+      animated = true;
+      setBooting(true);
       setBuffering(true);
       const lastRow = skillStats.items.length - 1;
       const lastPips = skillStats.items[lastRow].level;
@@ -100,54 +107,61 @@ export function Skills() {
       window.setTimeout(() => setBooting(false), doneAt);
     }
 
-    function isOnScreen(node: HTMLElement) {
-      const rect = node.getBoundingClientRect();
-      return rect.top < window.innerHeight * 0.72 && rect.bottom > 96;
+    const target = list;
+
+    function check() {
+      if (isListVisible(target)) {
+        reveal();
+      }
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          boot();
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          reveal();
         }
       },
-      { threshold: [0, 0.15, 0.3], rootMargin: "-8% 0px -20% 0px" },
+      { threshold: 0, rootMargin: "0px" },
     );
 
-    observer.observe(sheet);
-    if (isOnScreen(sheet)) {
-      boot();
-    }
+    observer.observe(list);
+    check();
 
-    function onScroll() {
-      if (isOnScreen(sheet)) {
-        boot();
-      }
-    }
+    const timers = [0, 120, 480, 1200, 2400].map((ms) =>
+      window.setTimeout(check, ms),
+    );
+    const onScroll = () => check();
+    const onViewport = () => check();
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.visualViewport?.addEventListener("resize", onViewport);
+    window.visualViewport?.addEventListener("scroll", onViewport);
 
     return () => {
       observer.disconnect();
+      for (const timer of timers) {
+        window.clearTimeout(timer);
+      }
       window.removeEventListener("scroll", onScroll);
+      window.visualViewport?.removeEventListener("resize", onViewport);
+      window.visualViewport?.removeEventListener("scroll", onViewport);
     };
   }, []);
 
   return (
     <section
-      ref={sheetRef}
       id="skills"
       aria-labelledby="skills-heading"
       className="relative mx-auto w-full max-w-[92rem] scroll-mt-28 px-[4.861vw] pt-28 pb-[22vh] text-ink"
     >
-      <div className={`skill-sheet${booting ? " is-booting" : ""}`}>
+      <div className={`skill-sheet${booting ? " is-booting" : ""}${lit ? " is-lit" : ""}`}>
         <h2
           id="skills-heading"
           className="font-body text-[40px] font-extralight italic leading-[1.2] tracking-[0.05em] [-webkit-text-stroke:1px_#0221e7]"
         >
           {skillStats.kicker}
         </h2>
-        <ul className="skill-list">
+        <ul ref={listRef} className="skill-list">
           {skillStats.items.map((item, row) => (
             <li key={item.id} className="skill-row">
               <p className="font-display text-[22px] font-medium leading-none tracking-[0.04em] md:text-[24px]">

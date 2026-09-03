@@ -144,9 +144,8 @@ export function Home() {
       <Skills />
       <Footer />
       <ScrollCue
-        atTop={atTop}
         onActivate={() => {
-          if (atTop) {
+          if (window.scrollY < 48) {
             document.getElementById("historia-mas")?.scrollIntoView({
               behavior: "smooth",
             });
@@ -154,7 +153,7 @@ export function Home() {
             setActiveHref("#historia");
             return;
           }
-          navigate("#historia");
+          navigate("#proyectos");
         }}
       />
     </main>
