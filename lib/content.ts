@@ -263,6 +263,7 @@ export const aboutStory = {
     body: "Leonardo di Caprio se metió también en mis sueños y cambió, de alguna forma, el destino de mi vida. Quedan muchas cosas en el tintero, pero este no es lugar para chapas.",
   },
   signOff: "Para más migueladas, nos leemos por correo.",
+  signOffEmail: "delmiguelmah@gmail.com",
 } as const;
 
 export const available =

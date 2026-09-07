@@ -7,7 +7,7 @@ import {
   breezeObserverInit,
   revealBreeze,
 } from "@/lib/breeze-reveal";
-import { aboutStory, site } from "@/lib/content";
+import { aboutStory } from "@/lib/content";
 
 function InkRule({ className = "" }: { className?: string }) {
   return (
@@ -258,7 +258,7 @@ export function HistoriaStory() {
             <footer className="historia-breeze relative mt-24 flex flex-col items-end gap-4 lg:mt-32">
               <InkRule className="w-[min(100%,22rem)] text-ink" />
               <a
-                href={`mailto:${site.email}`}
+                href={`mailto:${story.signOffEmail}`}
                 className="font-body text-xl font-extralight italic tracking-[0.02em] underline decoration-ink/30 underline-offset-[0.28em] transition-colors hover:decoration-ink"
               >
                 {story.signOff}
