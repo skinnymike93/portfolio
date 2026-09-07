@@ -115,6 +115,104 @@ main,
   outline-offset: 3px;
 }
 
+.hero-cv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+  height: 2.55rem;
+  flex-shrink: 0;
+  padding-inline: 0.53rem;
+  border: 1.275px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+  border-radius: 0.425rem;
+  font-family: var(--font-body);
+  font-size: 1.275rem;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-ink);
+  background-color: transparent;
+  text-decoration: none;
+  transition:
+    transform 0.22s cubic-bezier(0.22, 0.72, 0.28, 1),
+    color 0.24s ease,
+    border-color 0.24s ease,
+    background-color 0.24s ease;
+}
+
+.hero-cv:hover {
+  border-color: color-mix(in srgb, var(--color-ink) 38%, transparent);
+}
+
+.hero-cv:focus-visible {
+  outline: 1px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.hero-cv.is-downloading,
+.hero-cv.is-done {
+  transform: scale(0.98);
+  border-color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-inverse);
+}
+
+.hero-cv-label {
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
+}
+
+.hero-cv-label > span {
+  grid-area: 1 / 1;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.hero-cv-label > span.is-visible {
+  opacity: 1;
+}
+
+.hero-cv-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  overflow: clip;
+}
+
+.hero-cv-icon img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  transition: filter 0.24s ease;
+}
+
+.hero-cv.is-downloading .hero-cv-icon img,
+.hero-cv.is-done .hero-cv-icon img {
+  filter: brightness(0) invert(1);
+}
+
+.hero-cv.is-downloading .hero-cv-icon img {
+  animation: cv-download-nudge 0.58s ease-in-out infinite;
+}
+
+@keyframes cv-download-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(0.2em);
+  }
+}
+
 .scroll-cue-track {
   display: block;
   width: 12px;
@@ -2091,5 +2189,14 @@ main,
     transform: none;
     clip-path: none;
     pointer-events: auto;
+  }
+
+  .hero-cv.is-downloading .hero-cv-icon img {
+    animation: none;
+  }
+
+  .hero-cv.is-downloading,
+  .hero-cv.is-done {
+    transform: none;
   }
 }

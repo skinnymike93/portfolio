@@ -171,6 +171,80 @@ function GitHubMark() {
   );
 }
 
+function CvDownloadButton() {
+  const [phase, setPhase] = useState<"idle" | "loading" | "done">("idle");
+  const resetTimer = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimer.current !== undefined) {
+        window.clearTimeout(resetTimer.current);
+      }
+    };
+  }, []);
+
+  async function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    if (phase === "loading") {
+      return;
+    }
+
+    setPhase("loading");
+
+    try {
+      const response = await fetch(cv.href);
+      if (!response.ok) {
+        throw new Error("cv download failed");
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = cv.fileName;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      setPhase("done");
+      resetTimer.current = window.setTimeout(() => setPhase("idle"), 1400);
+    } catch {
+      window.location.assign(cv.href);
+      setPhase("idle");
+    }
+  }
+
+  return (
+    <a
+      href={cv.href}
+      download={cv.fileName}
+      onClick={handleClick}
+      className={`hero-cv${phase === "loading" ? " is-downloading" : ""}${
+        phase === "done" ? " is-done" : ""
+      }`}
+      aria-busy={phase === "loading"}
+      aria-live="polite"
+    >
+      <span className="hero-cv-icon" aria-hidden="true">
+        <img src="/images/download-cv.svg?v=2" alt="" />
+      </span>
+      <span className="hero-cv-label">
+        <span className={phase === "idle" ? "is-visible" : undefined} aria-hidden={phase !== "idle"}>
+          {cv.label}
+        </span>
+        <span
+          className={phase === "loading" ? "is-visible" : undefined}
+          aria-hidden={phase !== "loading"}
+        >
+          descargando…
+        </span>
+        <span className={phase === "done" ? "is-visible" : undefined} aria-hidden={phase !== "done"}>
+          en camino
+        </span>
+      </span>
+    </a>
+  );
+}
+
 function SiteHeader({
   activeHref,
   atTop,
@@ -181,6 +255,7 @@ function SiteHeader({
   onNavigate: (href: NavHref) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pendingNav = useRef<NavHref | null>(null);
   const current =
     navItems.find((item) => item.href === activeHref) ?? navItems[0];
 
@@ -205,6 +280,9 @@ function SiteHeader({
     document.documentElement.classList.add("is-menu-open");
     document.addEventListener("keydown", onKey);
     return () => {
+      const href = pendingNav.current;
+      pendingNav.current = null;
+
       body.style.position = "";
       body.style.top = "";
       body.style.left = "";
@@ -213,8 +291,14 @@ function SiteHeader({
       document.documentElement.classList.remove("is-menu-open");
       document.removeEventListener("keydown", onKey);
       window.scrollTo({ top: scrollY, left: 0, behavior: "instant" });
+
+      if (href) {
+        requestAnimationFrame(() => {
+          onNavigate(href);
+        });
+      }
     };
-  }, [menuOpen]);
+  }, [menuOpen, onNavigate]);
 
   useEffect(() => {
     function onResize() {
@@ -227,8 +311,8 @@ function SiteHeader({
   }, []);
 
   function goTo(href: NavHref) {
+    pendingNav.current = href;
     setMenuOpen(false);
-    onNavigate(href);
   }
 
   return (
@@ -250,20 +334,7 @@ function SiteHeader({
           </span>
         </p>
         <div className="site-header-actions flex shrink-0 items-center gap-2">
-          <a
-            href={cv.href}
-            download={cv.fileName}
-            className="hero-cv flex h-[2.55rem] shrink-0 items-center justify-center gap-[0.32rem] rounded-[0.425rem] border-[1.275px] border-ink/25 px-[0.53rem] font-body text-[1.275rem] font-normal leading-none whitespace-nowrap text-ink"
-          >
-            <span className="relative size-[1em] shrink-0 overflow-clip">
-              <img
-                src="/images/download-cv.svg?v=2"
-                alt=""
-                className="absolute inset-0 size-full max-w-none"
-              />
-            </span>
-            {cv.label}
-          </a>
+          <CvDownloadButton />
           <a
             href={github.href}
             className="hero-github"
