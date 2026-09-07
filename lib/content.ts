@@ -28,7 +28,8 @@ export const profileFacts = [
 
 export const cv = {
   label: "descargar cv",
-  href: "#",
+  href: "/files/miguel-delgado-cv.pdf",
+  fileName: "Miguel-Delgado-CV.pdf",
 };
 
 export const github = {
