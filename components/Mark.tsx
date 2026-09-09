@@ -1,4 +1,4 @@
-import { markColors } from "@/lib/content";
+import { markColors } from "@/lib/content/index";
 
 export function Mark({ size = 30 }: { size?: number }) {
   const cell = Math.round((size - 6) / 3);

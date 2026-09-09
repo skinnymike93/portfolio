@@ -1,6 +1,5 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import { Instrument_Serif, Newsreader, Savate } from "next/font/google";
-import { site } from "@/lib/content";
 import "./globals.css";
 
 const savate = Savate({
@@ -24,23 +23,6 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  title: "Miguel Delgado — Portfolio",
-  description: "Product Design Engineer",
-  openGraph: {
-    title: "Miguel Delgado — Portfolio",
-    description: "Product Design Engineer",
-    url: "https://migueldelgado.me",
-    siteName: "Miguel Delgado",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Miguel Delgado — Portfolio",
-    description: "Product Design Engineer",
-  },
-};
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -51,7 +33,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${savate.variable} ${newsreader.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="texture-favorita-4 min-h-full bg-background font-sans text-ink">

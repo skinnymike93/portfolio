@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { experience } from "@/lib/content";
+import { useContent } from "@/lib/i18n/content-provider";
 import {
   attachBreezeScrollFallback,
   breezeObserverInit,
@@ -36,6 +36,7 @@ function ArrowDown({ className }: { className?: string }) {
 }
 
 export function Experiencia() {
+  const { experience } = useContent();
   const rootRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {

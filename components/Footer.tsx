@@ -1,6 +1,9 @@
-import { siteClose } from "@/lib/content";
+"use client";
+
+import { useContent } from "@/lib/i18n/content-provider";
 
 export function Footer() {
+  const { siteClose } = useContent();
   return (
     <footer
       id="cierre"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { skillStats } from "@/lib/content";
+import { useContent } from "@/lib/i18n/content-provider";
 
 const PIP_MS = 70;
 const ROW_MS = 160;
@@ -46,13 +46,23 @@ function Meter({
   );
 }
 
-function BufferMeter({ name, max, live }: { name: string; max: number; live: boolean }) {
+function BufferMeter({
+  name,
+  max,
+  live,
+  inProgress,
+}: {
+  name: string;
+  max: number;
+  live: boolean;
+  inProgress: string;
+}) {
   return (
     <div
       className={`skill-meter skill-buffer${live ? " is-live" : ""}`}
       role="meter"
       aria-label={name}
-      aria-valuetext="en curso"
+      aria-valuetext={inProgress}
       aria-valuemin={0}
       aria-valuemax={max}
     >
@@ -79,6 +89,7 @@ function isListVisible(node: HTMLElement) {
 }
 
 export function Skills() {
+  const { skillStats } = useContent();
   const listRef = useRef<HTMLUListElement>(null);
   const [booting, setBooting] = useState(false);
   const [lit, setLit] = useState(false);
@@ -185,6 +196,7 @@ export function Skills() {
               name={skillStats.rest.name}
               max={skillStats.max}
               live={buffering}
+              inProgress={skillStats.inProgress}
             />
           </li>
         </ul>

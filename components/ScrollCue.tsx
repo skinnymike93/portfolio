@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useContent } from "@/lib/i18n/content-provider";
 
 function cueOpacityForProyectos(proyectosTop: number, viewportHeight: number) {
   const fadeStart = viewportHeight * 0.88;
@@ -15,6 +16,7 @@ function cueOpacityForProyectos(proyectosTop: number, viewportHeight: number) {
 }
 
 export function ScrollCue({ onActivate }: { onActivate: () => void }) {
+  const { ui } = useContent();
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export function ScrollCue({ onActivate }: { onActivate: () => void }) {
       }}
       aria-hidden={opacity < 0.04}
       tabIndex={opacity < 0.04 ? -1 : undefined}
-      aria-label="Sigue bajando"
+      aria-label={ui.scrollCueAria}
     >
       <span className="scroll-cue-track" aria-hidden="true">
         <svg
@@ -89,7 +91,7 @@ export function ScrollCue({ onActivate }: { onActivate: () => void }) {
         </svg>
       </span>
       <span className="flex items-baseline gap-[0.35em] font-body text-[13px] font-extralight italic leading-none tracking-[0.08em]">
-        sigue
+        {ui.scrollCue}
         <span className="scroll-cue-caret" />
       </span>
     </a>

@@ -1,9 +1,10 @@
 "use client";
 
-import { navItems } from "@/lib/content";
 import { InkMark } from "@/components/InkMark";
+import { useContent } from "@/lib/i18n/content-provider";
+import type { NavHref } from "@/lib/i18n/config";
 
-export type NavHref = (typeof navItems)[number]["href"];
+export type { NavHref };
 
 export function NavMark() {
   return (
@@ -22,8 +23,10 @@ export function Nav({
   activeHref?: NavHref;
   onNavigate?: (href: NavHref) => void;
 }) {
+  const { navItems, ui } = useContent();
+
   return (
-    <nav className={className} aria-label="Primary">
+    <nav className={className} aria-label={ui.navPrimary}>
       {navItems.map((item) => {
         const isActive = item.href === activeHref;
         return (

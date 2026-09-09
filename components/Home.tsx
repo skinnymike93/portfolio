@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { LangSetter } from "@/components/LangSetter";
+import { LocaleSwitch } from "@/components/LocaleSwitch";
 import { Nav, NavMark, type NavHref } from "@/components/Nav";
 import { ScrollCue } from "@/components/ScrollCue";
 import { HistoriaStory } from "@/components/HistoriaStory";
@@ -8,15 +10,20 @@ import { Proyectos } from "@/components/Proyectos";
 import { Experiencia } from "@/components/Experiencia";
 import { Skills } from "@/components/Skills";
 import { Footer } from "@/components/Footer";
-import {
-  cv,
-  github,
-  heroIntro,
-  navItems,
-  profileFacts,
-} from "@/lib/content";
+import { ContentProvider, useContent } from "@/lib/i18n/content-provider";
+import type { Locale } from "@/lib/i18n/config";
 
-export function Home() {
+export function Home({ locale }: { locale: Locale }) {
+  return (
+    <ContentProvider locale={locale}>
+      <LangSetter locale={locale} />
+      <HomePage />
+    </ContentProvider>
+  );
+}
+
+function HomePage() {
+  const { navItems } = useContent();
   const [activeHref, setActiveHref] = useState<NavHref>("#historia");
   const [atTop, setAtTop] = useState(true);
   const [intro, setIntro] = useState(true);
@@ -31,15 +38,12 @@ export function Home() {
       setIntro(false);
       return;
     }
-    // Chrome restaura el scroll al recargar, y eso cancelaba la intro.
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     const done = window.setTimeout(() => setIntro(false), 4500);
     return () => window.clearTimeout(done);
   }, []);
 
-  // Nada debe quedar invisible o inerte esperando a que acabe la intro:
-  // el primer gesto la corta y revela el sitio entero.
   useEffect(() => {
     if (!intro) {
       return;
@@ -100,7 +104,7 @@ export function Home() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [navItems]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -172,6 +176,7 @@ function GitHubMark() {
 }
 
 function CvDownloadButton() {
+  const { cv } = useContent();
   const [phase, setPhase] = useState<"idle" | "loading" | "done">("idle");
   const resetTimer = useRef<number | undefined>(undefined);
 
@@ -235,10 +240,10 @@ function CvDownloadButton() {
           className={phase === "loading" ? "is-visible" : undefined}
           aria-hidden={phase !== "loading"}
         >
-          descargando…
+          {cv.downloading}
         </span>
         <span className={phase === "done" ? "is-visible" : undefined} aria-hidden={phase !== "done"}>
-          en camino
+          {cv.onTheWay}
         </span>
       </span>
     </a>
@@ -254,6 +259,7 @@ function SiteHeader({
   atTop: boolean;
   onNavigate: (href: NavHref) => void;
 }) {
+  const { navItems, github, ui } = useContent();
   const [menuOpen, setMenuOpen] = useState(false);
   const pendingNav = useRef<NavHref | null>(null);
   const current =
@@ -333,7 +339,7 @@ function SiteHeader({
             <NavMark />
           </span>
         </p>
-        <div className="site-header-actions flex shrink-0 items-center gap-2">
+        <div className="site-header-actions flex shrink-0 items-center">
           <CvDownloadButton />
           <a
             href={github.href}
@@ -344,12 +350,13 @@ function SiteHeader({
           >
             <GitHubMark />
           </a>
+          <LocaleSwitch className="site-header-locale" />
           <button
             type="button"
             className="site-burger-btn"
             aria-expanded={menuOpen}
             aria-controls="site-menu"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label={menuOpen ? ui.menuClose : ui.menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
           >
             <span className="site-burger" aria-hidden="true">
@@ -366,7 +373,8 @@ function SiteHeader({
         aria-hidden={menuOpen ? undefined : true}
         inert={menuOpen ? undefined : true}
       >
-        <nav className="site-menu-nav" aria-label="Secciones">
+        <LocaleSwitch className="site-menu-locale" />
+        <nav className="site-menu-nav" aria-label={ui.menuSections}>
           {navItems.map((item) => {
             const isActive = item.href === activeHref;
             return (
@@ -399,13 +407,15 @@ function SiteHeader({
 }
 
 function Historia() {
+  const { heroIntro, profileFacts, ui } = useContent();
+
   return (
     <>
       <div className="hero-art pointer-events-none absolute top-[17.927%] left-[17.476%] flex h-[72.892%] w-[57.479%] items-center justify-center">
         <div className="relative h-[86.664%] w-[93.875%] rotate-[-6.11deg]">
           <img
             src="/images/hero-portrait.png"
-            alt="Illustrated portrait of Miguel Delgado seated in a lounge chair"
+            alt={ui.heroPortraitAlt}
             className="absolute inset-0 size-full max-w-none object-cover"
           />
         </div>

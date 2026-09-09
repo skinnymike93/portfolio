@@ -7,7 +7,7 @@ import {
   breezeObserverInit,
   revealBreeze,
 } from "@/lib/breeze-reveal";
-import { aboutStory } from "@/lib/content";
+import { useContent } from "@/lib/i18n/content-provider";
 
 function InkRule({ className = "" }: { className?: string }) {
   return (
@@ -74,7 +74,7 @@ function setupBreezeReveal(root: HTMLElement) {
 }
 
 export function HistoriaStory() {
-  const story = aboutStory;
+  const { aboutStory: story } = useContent();
   const [open, setOpen] = useState(false);
   const introRef = useRef<HTMLDivElement>(null);
   const foldRef = useRef<HTMLDivElement>(null);
@@ -152,7 +152,7 @@ export function HistoriaStory() {
             <figure className="historia-pro-mark">
               <img
                 src="/images/historia-botas.png"
-                alt="Botas de fútbol del Pro, colgadas de un gancho"
+                alt={story.bootsAlt}
               />
             </figure>
           </div>
@@ -167,12 +167,12 @@ export function HistoriaStory() {
           className="historia-breeze historia-crease mt-16 lg:mt-20"
           aria-expanded={open}
           aria-controls="historia-tintero"
-          aria-label={open ? "Cerrar el resto de la historia" : "Seguir leyendo la historia"}
+          aria-label={open ? story.expandClose : story.expandOpen}
           onClick={toggle}
         >
           <span className="historia-crease-face">
             <span className="historia-crease-copy">
-              {open ? "cerrar" : "seguir leyendo"}
+              {open ? story.creaseClose : story.creaseOpen}
             </span>
             <svg
               className="historia-crease-caret"
@@ -212,6 +212,7 @@ export function HistoriaStory() {
                   passenger={story.liverpool.passenger}
                   flight={story.liverpool.flight}
                   valid={story.liverpool.valid}
+                  labels={story.boardingPass}
                 />
                 <p className="historia-body max-w-[34rem]">{story.liverpool.body}</p>
               </div>

@@ -1,3 +1,5 @@
+import type { BoardingPassLabels } from "@/lib/content/types";
+
 function InkBarcode({
   bars,
   className,
@@ -67,6 +69,7 @@ export function BoardingPass({
   passenger,
   flight,
   valid,
+  labels,
 }: {
   fromCode: string;
   fromCity: string;
@@ -75,14 +78,15 @@ export function BoardingPass({
   passenger: string;
   flight: string;
   valid: string;
+  labels: BoardingPassLabels;
 }) {
   return (
     <figure
       className="historia-pass"
-      aria-label={`Pase de abordaje de ${fromCity} a ${toCity}, válido ${valid}`}
+      aria-label={labels.aria(fromCity, toCity, valid)}
     >
       <div className="historia-pass-main">
-        <p className="historia-pass-kicker">pase de abordaje · ida</p>
+        <p className="historia-pass-kicker">{labels.kicker}</p>
         <p className="historia-pass-name">{passenger}</p>
         <div className="historia-pass-route">
           <span className="historia-pass-code">{fromCode}</span>
@@ -95,11 +99,11 @@ export function BoardingPass({
         </p>
         <div className="historia-pass-meta">
           <p>
-            <span>vuelo</span>
+            <span>{labels.flight}</span>
             {flight}
           </p>
           <p>
-            <span>válido</span>
+            <span>{labels.valid}</span>
             {valid}
           </p>
         </div>

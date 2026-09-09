@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { projectSpread } from "@/lib/content";
+import { useContent } from "@/lib/i18n/content-provider";
 import {
   attachBreezeScrollFallback,
   breezeObserverInit,
@@ -25,10 +25,16 @@ function ProjectPhone({
   name,
   poster,
   video,
+  tourAria,
+  skipBackAria,
+  skipForwardAria,
 }: {
   name: string;
   poster: string;
   video: string;
+  tourAria: string;
+  skipBackAria: string;
+  skipForwardAria: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -57,20 +63,20 @@ function ProjectPhone({
           loop
           playsInline
           preload="metadata"
-          aria-label={`Recorrido de la interfaz de ${name}`}
+          aria-label={tourAria}
         />
         <div className="tarot-phone-skip">
           <button
             type="button"
             onClick={() => skip(-10)}
-            aria-label={`Retroceder 10 segundos en ${name}`}
+            aria-label={skipBackAria}
           >
             −10s
           </button>
           <button
             type="button"
             onClick={() => skip(10)}
-            aria-label={`Avanzar 10 segundos en ${name}`}
+            aria-label={skipForwardAria}
           >
             +10s
           </button>
@@ -81,6 +87,7 @@ function ProjectPhone({
 }
 
 export function Proyectos() {
+  const { projectSpread } = useContent();
   const rootRef = useRef<HTMLElement>(null);
   const spreadRef = useRef<HTMLDivElement>(null);
   const legendRef = useRef<HTMLUListElement>(null);
@@ -260,7 +267,14 @@ export function Proyectos() {
       <ul ref={legendRef} className="tarot-legend">
         {projectSpread.items.map((item) => (
           <li key={item.suit} className={`tarot-entry tarot-entry-${item.suit} tarot-breeze`}>
-            <ProjectPhone name={item.name} poster={item.poster} video={item.video} />
+            <ProjectPhone
+              name={item.name}
+              poster={item.poster}
+              video={item.video}
+              tourAria={projectSpread.videoTourAria(item.name)}
+              skipBackAria={projectSpread.videoSkipBackAria(item.name)}
+              skipForwardAria={projectSpread.videoSkipForwardAria(item.name)}
+            />
             <div className="tarot-copy">
               <h3>{item.name}</h3>
               <p>{item.body}</p>

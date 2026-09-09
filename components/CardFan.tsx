@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { practiceCards, waveform, type PracticeCard } from "@/lib/content";
+import {
+  practiceCards,
+  waveform,
+  type PracticeCard,
+} from "@/lib/content/practice";
 
 const tones: Record<
   PracticeCard["tone"],
