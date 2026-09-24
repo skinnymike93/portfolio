@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LangSetter } from "@/components/LangSetter";
 import { LocaleSwitch } from "@/components/LocaleSwitch";
@@ -209,6 +210,7 @@ function CvDownloadButton() {
       link.download = cv.fileName;
       link.click();
       URL.revokeObjectURL(url);
+      track("cv_download");
 
       setPhase("done");
       resetTimer.current = window.setTimeout(() => setPhase("idle"), 1400);

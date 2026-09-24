@@ -1,4 +1,5 @@
 import type { Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Instrument_Serif, Newsreader, Savate } from "next/font/google";
 import "./globals.css";
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="texture-favorita-4 min-h-full bg-background font-sans text-ink">
         {children}
+        <Analytics />
       </body>
     </html>
   );
