@@ -52,7 +52,7 @@ export type SiteContent = {
       body: string;
       href: string;
       card: string;
-      video: string;
+      video?: string;
       poster: string;
       suit: string;
     }[];

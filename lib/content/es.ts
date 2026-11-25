@@ -52,7 +52,7 @@ export const contentEs: SiteContent = {
   },
   projectSpread: {
     kicker: "proyectos",
-    lede: "dos productos, los míos",
+    lede: "tres productos, los míos",
     items: [
       {
         folio: "I",
@@ -77,6 +77,17 @@ export const contentEs: SiteContent = {
         video: "/videos/esferica.mp4",
         poster: "/videos/esferica.jpg",
         suit: "esferica",
+      },
+      {
+        folio: "III",
+        name: "Policop",
+        stamp: "founder · cpo",
+        line: "La plataforma de test para opositar a Policía Local en Andalucía.",
+        body: "Policop nace de nuestro compromiso con nuestra tierra: Andalucía. Una plataforma para que opositores a la Policía Local de Andalucía tengan más posibilidades de sacar su plaza, construida a través de un flujo de información inteligente que mide su evolución al milímetro para que avancen con firmeza y claridad en el reto de sus vidas.",
+        href: "https://policop.es/",
+        card: "/images/tarot/policop.png",
+        poster: "/videos/policop.jpg",
+        suit: "policop",
       },
     ],
     videoTourAria: (name) => `Recorrido de la interfaz de ${name}`,

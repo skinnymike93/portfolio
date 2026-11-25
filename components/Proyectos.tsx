@@ -31,7 +31,7 @@ function ProjectPhone({
 }: {
   name: string;
   poster: string;
-  video: string;
+  video?: string;
   tourAria: string;
   skipBackAria: string;
   skipForwardAria: string;
@@ -50,6 +50,16 @@ function ProjectPhone({
       return;
     }
     node.currentTime = Math.max(0, next);
+  }
+
+  if (!video) {
+    return (
+      <figure className="tarot-phone">
+        <div className="tarot-phone-frame">
+          <img src={poster} alt={name} loading="lazy" />
+        </div>
+      </figure>
+    );
   }
 
   return (

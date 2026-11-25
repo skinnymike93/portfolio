@@ -679,6 +679,10 @@ main,
   animation: tarot-offer-esferica 8.4s ease-in-out infinite;
 }
 
+.tarot-spread.is-playing .tarot-card-policop .tarot-card-live {
+  animation: tarot-offer-policop 8.4s ease-in-out infinite;
+}
+
 .tarot-spread:hover .tarot-card-live,
 .tarot-spread:focus-within .tarot-card-live {
   animation-play-state: paused;
@@ -697,6 +701,22 @@ main,
   }
   58% {
     transform: rotate(0.8deg) translate3d(0.1rem, 0.12rem, 0);
+  }
+}
+
+@keyframes tarot-offer-policop {
+  0%,
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  52% {
+    transform: rotate(0.4deg) translate3d(0.06rem, 0.08rem, 0);
+  }
+  76% {
+    transform: rotate(3.4deg) translate3d(0.16rem, -0.55rem, 0);
+  }
+  90% {
+    transform: rotate(1deg) translate3d(0, -0.16rem, 0);
   }
 }
 
@@ -723,29 +743,41 @@ main,
 }
 
 .tarot-card-mono {
-  left: 7%;
-  transform: rotate(-17deg);
+  left: 5%;
+  transform: rotate(-24deg);
 }
 
 .tarot-card-esferica {
-  right: 7%;
+  left: 27%;
+  top: 8%;
+  z-index: 4;
+  transform: rotate(0deg);
+}
+
+.tarot-card-policop {
+  right: 5%;
   z-index: 3;
-  transform: rotate(17deg);
+  transform: rotate(24deg);
 }
 
 .tarot-card:hover,
 .tarot-card:focus-visible {
-  z-index: 4;
+  z-index: 5;
 }
 
 .tarot-card-mono:hover,
 .tarot-card-mono:focus-visible {
-  transform: rotate(-22deg) translateY(-1.15rem);
+  transform: rotate(-29deg) translateY(-1.15rem);
 }
 
 .tarot-card-esferica:hover,
 .tarot-card-esferica:focus-visible {
-  transform: rotate(22deg) translateY(-1.15rem);
+  transform: rotate(0deg) translateY(-1.4rem);
+}
+
+.tarot-card-policop:hover,
+.tarot-card-policop:focus-visible {
+  transform: rotate(29deg) translateY(-1.15rem);
 }
 
 .tarot-card:focus-visible {
@@ -757,7 +789,7 @@ main,
   pointer-events: none;
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 6;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -767,7 +799,7 @@ main,
   pointer-events: none;
   position: absolute;
   inset: 0;
-  z-index: 6;
+  z-index: 7;
 }
 
 .tarot-sparkle {
@@ -888,12 +920,14 @@ main,
   overflow: visible;
 }
 
-.tarot-entry-mono .tarot-phone {
+.tarot-entry-mono .tarot-phone,
+.tarot-entry-policop .tarot-phone {
   grid-column: 2;
   grid-row: 1;
 }
 
-.tarot-entry-mono .tarot-copy {
+.tarot-entry-mono .tarot-copy,
+.tarot-entry-policop .tarot-copy {
   grid-column: 1;
   grid-row: 1;
 }
@@ -964,6 +998,10 @@ main,
   transform: rotate(2.4deg);
 }
 
+.tarot-entry-policop .tarot-phone {
+  transform: rotate(2deg);
+}
+
 .tarot-entry-esferica .tarot-phone {
   transform: rotate(-2.6deg);
 }
@@ -976,10 +1014,13 @@ main,
 .tarot-entry-mono .tarot-phone:hover,
 .tarot-entry-mono .tarot-phone:focus-within,
 .tarot-entry-esferica .tarot-phone:hover,
-.tarot-entry-esferica .tarot-phone:focus-within {
+.tarot-entry-esferica .tarot-phone:focus-within,
+.tarot-entry-policop .tarot-phone:hover,
+.tarot-entry-policop .tarot-phone:focus-within {
   transform: rotate(0deg) scale(1.72);
 }
 
+.tarot-phone img,
 .tarot-phone video {
   display: block;
   width: 100%;
@@ -1470,15 +1511,18 @@ main,
   }
 
   .tarot-entry,
-  .tarot-entry-mono {
+  .tarot-entry-mono,
+  .tarot-entry-policop {
     grid-template-columns: minmax(0, 1fr) 7.1rem;
   }
 
-  .tarot-entry-mono .tarot-phone {
+  .tarot-entry-mono .tarot-phone,
+  .tarot-entry-policop .tarot-phone {
     grid-column: 2;
   }
 
-  .tarot-entry-mono .tarot-copy {
+  .tarot-entry-mono .tarot-copy,
+  .tarot-entry-policop .tarot-copy {
     grid-column: 1;
   }
 
@@ -1512,7 +1556,9 @@ main,
   .tarot-entry-mono .tarot-phone:hover,
   .tarot-entry-mono .tarot-phone:focus-within,
   .tarot-entry-esferica .tarot-phone:hover,
-  .tarot-entry-esferica .tarot-phone:focus-within {
+  .tarot-entry-esferica .tarot-phone:focus-within,
+  .tarot-entry-policop .tarot-phone:hover,
+  .tarot-entry-policop .tarot-phone:focus-within {
     transform: rotate(0deg) scale(1.22);
   }
 
@@ -2202,12 +2248,17 @@ main,
 
   .tarot-card-mono:hover,
   .tarot-card-mono:focus-visible {
-    transform: rotate(-17deg);
+    transform: rotate(-24deg);
   }
 
   .tarot-card-esferica:hover,
   .tarot-card-esferica:focus-visible {
-    transform: rotate(17deg);
+    transform: rotate(0deg);
+  }
+
+  .tarot-card-policop:hover,
+  .tarot-card-policop:focus-visible {
+    transform: rotate(24deg);
   }
 
   .tarot-phone {

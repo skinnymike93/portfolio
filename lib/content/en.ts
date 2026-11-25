@@ -52,7 +52,7 @@ export const contentEn: SiteContent = {
   },
   projectSpread: {
     kicker: "projects",
-    lede: "two products of my own",
+    lede: "three products of my own",
     items: [
       {
         folio: "I",
@@ -77,6 +77,17 @@ export const contentEn: SiteContent = {
         video: "/videos/esferica.mp4",
         poster: "/videos/esferica.jpg",
         suit: "esferica",
+      },
+      {
+        folio: "III",
+        name: "Policop",
+        stamp: "founder · cpo",
+        line: "The practice-test platform for Local Police exams in Andalusia.",
+        body: "Policop is born from our commitment to our homeland: Andalusia. A platform that gives candidates for the Andalusian Local Police a better shot at landing their post, built on an intelligent flow of information that tracks their progress down to the millimetre, so they can move forward with confidence and clarity in the challenge of their lives.",
+        href: "https://policop.es/",
+        card: "/images/tarot/policop.png",
+        poster: "/videos/policop.jpg",
+        suit: "policop",
       },
     ],
     videoTourAria: (name) => `${name} interface walkthrough`,
