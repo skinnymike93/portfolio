@@ -86,6 +86,7 @@ export const contentEn: SiteContent = {
         body: "Policop is born from our commitment to our homeland: Andalusia. A platform that gives candidates for the Andalusian Local Police a better shot at landing their post, built on an intelligent flow of information that tracks their progress down to the millimetre, so they can move forward with confidence and clarity in the challenge of their lives.",
         href: "https://policop.es/",
         card: "/images/tarot/policop.png",
+        video: "/videos/policop.mp4",
         poster: "/videos/policop.jpg",
         suit: "policop",
       },

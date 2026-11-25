@@ -86,6 +86,7 @@ export const contentEs: SiteContent = {
         body: "Policop nace de nuestro compromiso con nuestra tierra: Andalucía. Una plataforma para que opositores a la Policía Local de Andalucía tengan más posibilidades de sacar su plaza, construida a través de un flujo de información inteligente que mide su evolución al milímetro para que avancen con firmeza y claridad en el reto de sus vidas.",
         href: "https://policop.es/",
         card: "/images/tarot/policop.png",
+        video: "/videos/policop.mp4",
         poster: "/videos/policop.jpg",
         suit: "policop",
       },
